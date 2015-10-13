@@ -25,4 +25,9 @@ defmodule HelloPhoenix.UserTest do
     attrs = %{@valid_attrs | bio: "I"}
     assert {:bio, {"should be at least %{count} characters", [count: 2]}} in errors_on(%User{}, attrs)
   end
+
+  test "bio must be at most 140 characters long" do
+    attrs = %{@valid_attrs | bio: long_string(141)}
+    assert {:bio, {"should be at most %{count} characters", [count: 140]}} in errors_on(%User{}, attrs)
+  end
 end
